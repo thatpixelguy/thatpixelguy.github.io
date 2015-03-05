@@ -14,4 +14,3 @@ defaults:
     values:
       layout: "post"
       author: "Mike Burns"
-      date: YYYY-MM-DD HH:MM:SS +/-TTTT
