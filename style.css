@@ -53,6 +53,13 @@ body {
   background-color: rgb(200, 255, 0);
 }
 
+.post {
+  padding: 4px;
+  background-color: #151515;
+  border: 8px dashed #000;
+  border-radius: 12px;
+}
+
 .footer {
   text-align: center;
 }
