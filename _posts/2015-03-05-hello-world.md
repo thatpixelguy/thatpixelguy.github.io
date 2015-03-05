@@ -1,13 +1,16 @@
 ---
-published: true
+published: 
+  - true
+  - "true"
 layout: post
+date: "2015-03-05 17:00"
 ---
 
 Hello, world!
 
 testing!
 
-~~~ c
+~~~c
 #include <stdio.h>
 
 int main(int argc, char **argv)
