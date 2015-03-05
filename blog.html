@@ -5,13 +5,8 @@ published: true
 
 <h2>Blog</h2>
 
-<ul class="posts">  
-	{% for post in site.posts limit:20 %}  
-	   <li>  
-		   <span>{{ post.date | date_to_string }}</span> &raquo;  
-		   <a href="{{ BASE_PATH }}{{ post.url }}">  
-		   {{ post.title }}</a>  
-	   </li>  
+	{% for post in site.posts %}  
+        <h3><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></h3>
+  		<small>Posted on {{ post.date | date_to_string }} by {{ post.author }}</small>
+  		<p>{{ post.excerpt }} </p> 
 	{% endfor %}  
-</ul>
-
