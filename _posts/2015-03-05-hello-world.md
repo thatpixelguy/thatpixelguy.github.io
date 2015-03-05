@@ -1,9 +1,5 @@
 ---
-published: false
----
-
----
-layout: default
+published: true
 ---
 
 ## A New Post
