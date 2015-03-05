@@ -28,8 +28,14 @@ body {
 
 .nav {
   width: 100%;
-  font-size: 24px;
   margin-bottom: 15px;
+}
+
+.nav a:link, .nav a:visited {
+  display: block;
+  padding: 4px 10px;
+  background-color: rgb(150, 200, 0);
+  color: #000;
 }
 
 .footer {
