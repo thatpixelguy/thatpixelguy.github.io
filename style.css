@@ -32,7 +32,6 @@ body {
 }
 
 .nav a:link, .nav a:visited {
-  display: block;
   padding: 4px 10px;
   background-color: rgb(150, 200, 0);
   color: #000;
