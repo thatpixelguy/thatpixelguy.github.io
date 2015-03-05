@@ -3,8 +3,15 @@ published: true
 layout: post
 ---
 
-## A New Post
-
 Hello, world!
 
 testing!
+
+```c
+#include <stdio.h>
+
+int main(int argc, char **argv)
+{
+    printf("Hello, world!\n");
+}
+```
