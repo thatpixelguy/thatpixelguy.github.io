@@ -10,6 +10,5 @@ published: true
     <h3><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></h3>
     <small><i style='color: #aaa;'>Posted on {{ post.date | date_to_string }} by {{ post.author }}</i></small>
     <p>{{ post.content | markdownify }}</p>
-    <p><a href="{{ BASE_PATH }}{{ post.url }}">Continue reading...</a></p>
   </div>
 {% endfor %}
