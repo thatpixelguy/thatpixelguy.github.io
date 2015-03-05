@@ -46,6 +46,7 @@ body {
   color: #000;
   vertical-align: center;
   width: 96px;
+  float: left;
 }
 
 .nav a:hover {
