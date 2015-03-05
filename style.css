@@ -88,6 +88,10 @@ a:active {
   color: #ddd;
 }        
 
-
+td {
+  padding: 4px;
+  background-color: #151515;
+  border: 1px solid #000;
+}
 
             
