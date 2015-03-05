@@ -15,7 +15,7 @@ defaults:
       layout: "post"
       author: "Mike Burns"
  
- prose:
+prose:
   metadata:
     "_posts": |
       layout: post
