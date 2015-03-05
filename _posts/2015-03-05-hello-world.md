@@ -6,11 +6,9 @@ layout: post
 date: "2015-03-05 17:00"
 ---
 
-Hello, world!
+Hello, world! This is just a test post to make sure the blog's working properly.
 
-testing!
-
-C how awesome this is?!
+Syntax highlighting -- C how awesome it is?!
 
 ```c
 #include <stdio.h>
@@ -21,7 +19,7 @@ int main(int argc, char **argv)
 }
 ```
 
-Pythooooooooon!
+PYTHON!
 
 ```python
 print("Hello, world!")
