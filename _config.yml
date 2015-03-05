@@ -4,5 +4,13 @@ permalink: pretty
 
 defaults:
   -
+    scope:
+      type: "pages"
     values:
       layout: "default"
+  -
+    scope:
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Mike Burns"
