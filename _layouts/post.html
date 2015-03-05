@@ -7,6 +7,7 @@
          If you include the next line in all your web pages, they will all share the same look.
          This makes it easier to make new pages for your site. -->
     <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/darkly.css" rel="stylesheet" type="text/css" media="all">
     <link rel="icon" type="image/ico" href="/favicon.ico">
   </head>
   <body>
@@ -29,7 +30,7 @@
       
       <h2><a href='{{ page.url }}'>{{ page.title }}</a></h2>
 
-      <div markdown="1">{{ page.content | markdownify }}</div>
+      <div markdown="1">{{ page.content }}</div>
 
       
       <div class='footer'>Copyright &copy; 2015 Mike Burns</div>
