@@ -23,6 +23,12 @@ int main(int argc, char **argv)
 print("Hello, world!")
 ~~~
 
+{% highlight ruby %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+
 | First Header  | Second Header |
 | ------------- | ------------- |
 | Content Cell  | Content Cell  |
