@@ -44,9 +44,10 @@ body {
   background-color: rgb(150, 200, 0);
   color: #000;
   vertical-align: center;
-  width: 96px;
+  width: 125px;
   float: left;
   text-align: center;
+  border-right: 1px solid #000;
 }
 
 .nav a:hover {
