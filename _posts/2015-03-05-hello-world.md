@@ -20,8 +20,7 @@ int main(int argc, char **argv)
 print("Hello, world!")
 ~~~
 
-{% highlight ruby %}
-
-print "Something!"
-
-{% endhighlight %}
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
