@@ -44,7 +44,8 @@ body {
   background-color: rgb(150, 200, 0);
   color: #000;
   vertical-align: center;
-  width: 125px;
+  width: 124px;
+  border-right: 1px solid black;
   float: left;
   text-align: center;
 }
