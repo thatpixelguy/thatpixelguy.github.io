@@ -1,4 +1,5 @@
 permalink: pretty
+highlighter: pygments
 #markdown: kramdown
 #pygments: true
 
