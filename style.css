@@ -30,7 +30,6 @@ body {
   width: 100%;
   margin-bottom: 15px;
   background-color: rgb(150, 200, 0);
-  height: 32px;
 }
 
 .nav ul {
@@ -41,13 +40,13 @@ body {
 
 .nav a:link, .nav a:visited {
   display: block;
-  padding: 0px 10px;
+  padding: 4px 0px;
   background-color: rgb(150, 200, 0);
   color: #000;
   vertical-align: center;
   width: 96px;
-  height: 32px;
   float: left;
+  text-align: center;
 }
 
 .nav a:hover {
