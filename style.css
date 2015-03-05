@@ -55,7 +55,8 @@ body {
 
 .post {
   padding: 4px 12px;
-  border-top: 4px dashed #151515;
+  border: 3px dashed #151515;
+  border-radius: 12px;
   margin-top: 12px;
 }
 
