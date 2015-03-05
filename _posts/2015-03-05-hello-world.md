@@ -11,6 +11,7 @@ Hello, world!
 testing!
 
 C how awesome this is?!
+
 ```c
 #include <stdio.h>
 
@@ -21,6 +22,7 @@ int main(int argc, char **argv)
 ```
 
 Pythooooooooon!
+
 ```python
 print("Hello, world!")
 ```
