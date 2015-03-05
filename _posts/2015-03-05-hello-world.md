@@ -10,6 +10,7 @@ Hello, world!
 
 testing!
 
+C how awesome this is?!
 ```c
 #include <stdio.h>
 
@@ -19,15 +20,10 @@ int main(int argc, char **argv)
 }
 ```
 
-~~~python
+Pythooooooooon!
+```python
 print("Hello, world!")
-~~~
-
-{% highlight ruby %}
-def foo
-  puts 'foo'
-end
-{% endhighlight %}
+```
 
 | First Header  | Second Header |
 | ------------- | ------------- |
