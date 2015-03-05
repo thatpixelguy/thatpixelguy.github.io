@@ -1,6 +1,6 @@
 ---
 published: true
-layout: blog
+layout: post
 ---
 
 ## A New Post
