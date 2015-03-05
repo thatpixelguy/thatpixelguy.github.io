@@ -30,7 +30,7 @@ body {
   width: 100%;
   margin-bottom: 15px;
   background-color: rgb(150, 200, 0);
-  padding: 4px 0;
+  height: 32px;
 }
 
 .nav a:link, .nav a:visited {
@@ -38,6 +38,7 @@ body {
   background-color: rgb(150, 200, 0);
   color: #000;
   vertical-align: center;
+  height: 32px;
 }
 
 .nav a:hover {
