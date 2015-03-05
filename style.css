@@ -47,7 +47,6 @@ body {
   width: 125px;
   float: left;
   text-align: center;
-  border-right: 1px solid #000;
 }
 
 .nav a:hover {
