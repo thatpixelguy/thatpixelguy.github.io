@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 }
 ~~~
 
-~~~ python
+~~~python
 print("Hello, world!")
 ~~~
 
