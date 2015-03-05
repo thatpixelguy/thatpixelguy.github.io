@@ -58,6 +58,7 @@ body {
   background-color: #151515;
   border: 8px dashed #000;
   border-radius: 12px;
+  margin-top: 12px;
 }
 
 .footer {
