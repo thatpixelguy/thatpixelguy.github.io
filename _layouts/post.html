@@ -14,9 +14,9 @@
     <div class='container'>
       
       <div class='header'>
-        <img src='/avatar-140x140.png' style='margin-right: 20px;'>
+        <img src='/avatar.png' style='margin-right: 20px; border-radius: 52px; border: 2px dotted #333;'>
         <h2>you@thepixelguy:~$ <div id='blinkingcursor' style='display: inline;'>█</div></h2>
-        <p><i style='font-size: 11px;'>the only logical explanation that I can think of for your being here is that you were eaten by a grue.</i></p>
+        <p><i style='font-size: 11px;'>it is now pitch black. if you proceed, you are likely to be eaten by a grue.</i></p>
         <div class='nav'>
           <a href='/'>Home</a> |
           <a href='/games'>Games</a> | 
@@ -25,9 +25,9 @@
         </div>
       </div>
       
-      <h2><a href='{{ post.url }}'>{{ post.title }}</a></h2>
+      <h2><a href='{{ page.url }}'>{{ page.title }}</a></h2>
 
-      <p>{{ post.content }}</p>
+      <p>{{ page.content }}</p>
 
       
       <div class='footer'>Copyright &copy; 2015 Mike Burns</div>
