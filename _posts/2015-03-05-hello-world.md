@@ -1,5 +1,6 @@
 ---
 published: true
+layout: blog
 ---
 
 ## A New Post
