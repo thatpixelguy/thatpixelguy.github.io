@@ -45,7 +45,7 @@ body {
   background-color: rgb(150, 200, 0);
   color: #000;
   vertical-align: center;
-  height: 32px;
+  width: 96px;
 }
 
 .nav a:hover {
