@@ -3,7 +3,7 @@ published: false
 ---
 
 ---
-layout: blog
+layout: default
 ---
 
 ## A New Post
