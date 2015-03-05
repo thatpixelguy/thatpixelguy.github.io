@@ -5,8 +5,10 @@ published: true
 
 <h2>Blog</h2>
 
-	{% for post in site.posts %}  
-        <h3><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></h3>
-  		<small>Posted on {{ post.date | date_to_string }} by {{ post.author }}</small>
-  		<p>{{ post.excerpt }} </p> 
-	{% endfor %}  
+{% for post in site.posts %}
+  <div class='post'>
+    <h3><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></h3>
+    <small>Posted on {{ post.date | date_to_string }} by {{ post.author }}</small>
+    <p>{{ post.excerpt }}</p>
+  </div>
+{% endfor %}  
