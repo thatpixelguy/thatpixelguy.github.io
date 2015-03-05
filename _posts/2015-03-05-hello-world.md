@@ -19,3 +19,9 @@ int main(int argc, char **argv)
 ~~~ python
 print("Hello, world!")
 ~~~
+
+{% highlight ruby %}
+
+print "Something!"
+
+{% endhighlight %}
