@@ -27,6 +27,7 @@ Pythooooooooon!
 print("Hello, world!")
 ```
 And here's a table!
+
 | First Header  | Second Header |
 | ------------- | ------------- |
 | Content Cell  | Content Cell  |
