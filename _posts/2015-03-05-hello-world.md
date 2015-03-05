@@ -10,14 +10,14 @@ Hello, world!
 
 testing!
 
-~~~c
+```c
 #include <stdio.h>
 
 int main(int argc, char **argv)
 {
     printf("Hello, world!\n");
 }
-~~~
+```
 
 ~~~python
 print("Hello, world!")
