@@ -105,10 +105,18 @@ a:active {
   color: #ddd;
 }        
 
+table {
+  width: 100%;
+}
+
 th, td {
   padding: 4px 8px;
   background-color: #151515;
-  border: 0;
+  border-left: 0;
+  border-right: 0;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-collapse: collapse;
 }
 
             
