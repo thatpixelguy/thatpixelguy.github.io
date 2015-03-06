@@ -121,7 +121,11 @@ th, td {
   text-align: left;
 }
 
-tr:nth-child(odd) {
+th {
+  background-color: #151515;
+}
+
+tr:nth-child(even) {
     background-color: #151515;
 }
 
