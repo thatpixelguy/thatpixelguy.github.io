@@ -77,6 +77,11 @@ body {
   margin-top: 16px;
 }
 
+#dsq-textarea-wrapper {
+  background-color: #000;
+  color: #bbb;
+}
+
 .footer {
   text-align: center;
   margin-top: 16px;
