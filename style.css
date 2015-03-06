@@ -59,6 +59,11 @@ body {
   background-color: rgb(200, 255, 0);
 }
 
+.nav a:active {
+  background-color: #fff;
+  margin-top: 2px;
+}
+
 .post {
   border-top: 3px dashed #151515;
   margin-top: 12px;
