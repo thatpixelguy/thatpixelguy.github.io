@@ -30,7 +30,11 @@ print("Hello, world!")
 ```
 And here's a table!
 
-| First Header  | Second Header |
+| Superhero     | Alias         |
 | ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+| Batman        | Bruce Wayne   |
+| Superman      | Clark Kent    |
+| Wonder Woman  | Diana Prince  |
+| Flash         | Barry Allen   |
+| Green Lantern | John Stewart  |
+| Green Arrow   | Oliver Queen  |
