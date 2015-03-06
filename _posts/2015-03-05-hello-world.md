@@ -8,11 +8,11 @@ date: "2015-03-05 17:00"
 
 Hello, world! This is just a test post to make sure the blog's working properly.
 
-Syntax highlighting -- C how awesome it is?!
-
 Images!
 
 ![The Tumbler](http://media.dcentertainment.com/sites/default/files/Tumbler1forblog.jpg)
+
+Syntax highlighting -- C how awesome it is?!
 
 ```c
 #include <stdio.h>
