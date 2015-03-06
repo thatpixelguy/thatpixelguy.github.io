@@ -64,7 +64,7 @@ body {
 }
 
 .post {
-  border-top: 3px dashed #151515;
+  border-top: 2px solid #151515;
   margin-top: 12px;
   margin-bottom: 12px;
 }
@@ -75,11 +75,6 @@ body {
 
 #disqus_thread {
   margin-top: 16px;
-}
-
-#disqus_thread textarea {
-  background-color: #000 !important;
-  color: #bbb !important;
 }
 
 .footer {
