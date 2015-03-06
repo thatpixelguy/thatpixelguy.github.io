@@ -116,8 +116,8 @@ th, td {
   background-color: #151515;
   border-left: 0;
   border-right: 0;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
   border-collapse: collapse;
   text-align: left;
 }
