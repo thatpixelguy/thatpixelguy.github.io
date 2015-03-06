@@ -54,6 +54,7 @@ body {
   color: #000;
   float: left;
   text-align: center;
+  border-radius: 8px;
 }
 
 .nav a:hover {
