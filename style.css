@@ -53,8 +53,6 @@ body {
   padding: 4px 16px;
   background-color: rgb(150, 200, 0);
   color: #000;
-  vertical-align: center;
-  float: left;
   text-align: center;
 }
 
@@ -63,7 +61,7 @@ body {
 }
 
 .nav a:active {
-  margin-top: 2px;
+  background-color: rgb(255, 255, 255);
 }
 
 .post {
