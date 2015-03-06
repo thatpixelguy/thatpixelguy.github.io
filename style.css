@@ -65,6 +65,10 @@ body {
   margin-top: 12px;
 }
 
+.post img {
+  max-width: 476px;
+}
+
 .footer {
   text-align: center;
   margin-top: 16px;
