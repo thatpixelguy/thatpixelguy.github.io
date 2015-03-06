@@ -3,7 +3,7 @@
    "how to change link color." */
 
 body {
-  background-color: #202020;
+  background-color: #171717;
   color: #bbb;
   font-family: Consolas, Menlo, "Lucida Console", Monaco, monospace;
 }    
@@ -14,7 +14,7 @@ body {
   background-color: #000;
   padding: 64px;
   border-radius: 128px;
-  border: 20px dashed #202020;
+  border: 20px dashed #171717;
 }
 
 .container img {
@@ -64,7 +64,7 @@ body {
 }
 
 .post {
-  border-top: 8px solid #202020;
+  border-top: 8px solid #171717;
   margin-top: 12px;
   margin-bottom: 12px;
   padding-top: 8px;
@@ -122,10 +122,10 @@ th, td {
 }
 
 th {
-  background-color: #202020;
+  background-color: #171717;
 }
 
 tr:nth-child(even) {
-    background-color: #202020;
+    background-color: #171717;
 }
 
