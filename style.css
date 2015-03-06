@@ -129,4 +129,8 @@ th {
   background-color: #777;
   color: #000;
 }
-            
+
+tr:nth-child(even) {
+    background-color: #252525;
+}
+
