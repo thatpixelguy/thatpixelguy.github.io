@@ -37,7 +37,6 @@ body {
   border: none;
   margin-bottom: 15px;
   background-color: rgb(150, 200, 0);
-  border-radius: 8px;
 }
 
 .nav ul {
@@ -54,7 +53,6 @@ body {
   color: #000;
   float: left;
   text-align: center;
-  border-radius: 8px;
 }
 
 .nav a:hover {
