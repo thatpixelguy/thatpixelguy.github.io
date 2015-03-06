@@ -14,7 +14,7 @@
       {% include header.html %}
       
       <h2>{{ page.title }}</h2>
-      <small><i style='color: #aaa;'>Posted on {{ page.date | date_to_string }} by {{ page.author }}</i></small>
+      <small style='color: #777;'>Posted on {{ post.date | date: "%B %-d, %Y" }} by {{ page.author }}</small>
 
       <div markdown="1">{{ page.content | markdownify }}</div>
             
