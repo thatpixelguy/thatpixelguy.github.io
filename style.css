@@ -106,8 +106,9 @@ a:active {
 }        
 
 th, td {
-  padding: 4px;
+  padding: 4px 8px;
   background-color: #151515;
+  border: 0;
 }
 
             
