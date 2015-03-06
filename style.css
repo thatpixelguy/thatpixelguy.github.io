@@ -113,7 +113,6 @@ table {
 
 th, td {
   padding: 4px 8px;
-  background-color: #151515;
   border-left: 0;
   border-right: 0;
   border-top: 2px solid black;
@@ -122,4 +121,12 @@ th, td {
   text-align: left;
 }
 
+th {
+  background-color: #151515;
+}
+
+td {
+  background-color: #777;
+  color: #000;
+}
             
