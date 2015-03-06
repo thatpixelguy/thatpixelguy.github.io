@@ -13,7 +13,7 @@
       
       {% include header.html %}
       
-      <h2><a href='{{ page.url }}'>{{ page.title }}</a></h2>
+      <h2>{{ page.title }}</h2>
       <small><i style='color: #aaa;'>Posted on {{ page.date | date_to_string }} by {{ page.author }}</i></small>
 
       <div markdown="1">{{ page.content | markdownify }}</div>
