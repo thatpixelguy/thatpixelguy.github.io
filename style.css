@@ -121,11 +121,11 @@ th, td {
   text-align: left;
 }
 
-th {
+td {
   background-color: #151515;
 }
 
-td {
+th {
   background-color: #777;
   color: #000;
 }
