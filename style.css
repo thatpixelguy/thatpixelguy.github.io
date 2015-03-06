@@ -48,11 +48,9 @@ body {
   background-color: rgb(150, 200, 0);
   color: #000;
   vertical-align: center;
-  width: 117px;
-  margin-right: 8px;
+  width: 125px;
   float: left;
   text-align: center;
-  border-radius: 8px;
 }
 
 .nav a:hover {
