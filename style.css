@@ -31,12 +31,16 @@ body {
 }
 
 .nav {
+  display: table;
   width: 100%;
+  border-collapse: collapse;
+  border: none;
   margin-bottom: 15px;
   background-color: rgb(150, 200, 0);
 }
 
 .nav ul {
+  display: table-row;
   list-style-type: none;
   padding: 0;
   margin: 0 auto;
@@ -45,7 +49,7 @@ body {
 }
 
 .nav a:link, .nav a:visited {
-  display: block;
+  display: table-cell;
   padding: 4px 16px;
   background-color: rgb(150, 200, 0);
   color: #000;
