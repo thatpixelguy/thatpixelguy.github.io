@@ -59,9 +59,9 @@ body {
 }
 
 .post {
-  padding: 4px 12px;
   border-top: 3px dashed #151515;
   margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 .post img {
