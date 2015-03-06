@@ -30,11 +30,11 @@ print("Hello, world!")
 ```
 And here's a table!
 
-| Superhero     | Alias         | Place of Birth |
-| ------------- | ------------- | -------------- |
-| Batman        | Bruce Wayne   | Gotham         |
-| Superman      | Clark Kent    | Krypton        |
-| Wonder Woman  | Diana Prince  | Themyscira     |
-| Flash         | Barry Allen   | Central City   |
-| Green Lantern | John Stewart  | ???            |
-| Green Arrow   | Oliver Queen  | Starling City  |
+| ID | Superhero     | Alias         | Place of Birth |
+|  0 | ------------- | ------------- | -------------- |
+|  1 | Batman        | Bruce Wayne   | Gotham         |
+|  2 | Superman      | Clark Kent    | Krypton        |
+|  3 | Wonder Woman  | Diana Prince  | Themyscira     |
+|  4 | Flash         | Barry Allen   | Central City   |
+|  5 | Green Lantern | John Stewart  | ???            |
+|  6 | Green Arrow   | Oliver Queen  | Starling City  |
