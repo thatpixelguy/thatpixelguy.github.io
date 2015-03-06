@@ -10,5 +10,20 @@ published: true
     <h3><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></h3>
     <small><i style='color: #aaa;'>Posted on {{ post.date | date_to_string }} by {{ post.author }}</i></small>
     <p>{{ post.content | markdownify }}</p>
+    <a href="{{ BASE_PATH }}{{ post.url }}#disqus_thread">Comments</a>
   </div>
 {% endfor %}
+
+
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'thepixelguy';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
