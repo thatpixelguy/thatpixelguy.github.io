@@ -40,15 +40,15 @@ body {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  text-align: center;
 }
 
 .nav a:link, .nav a:visited {
   display: block;
-  padding: 4px 0px;
+  padding: 4px 10px;
   background-color: rgb(150, 200, 0);
   color: #000;
   vertical-align: center;
-  width: 125px;
   float: left;
   text-align: center;
 }
