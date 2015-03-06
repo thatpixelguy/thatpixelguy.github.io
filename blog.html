@@ -10,7 +10,7 @@ published: true
     <h3><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></h3>
     <small><i style='color: #aaa;'>Posted on {{ post.date | date_to_string }} by {{ post.author }}</i></small>
     <p>{{ post.content | markdownify }}</p>
-    <p style='line-height: 24px; height: 24px;'><img src='/comments.png' /> <a href="{{ BASE_PATH }}{{ post.url }}#disqus_thread">Comments</a></p>
+    <p><img src='/comments.png' height=12 /> <a href="{{ BASE_PATH }}{{ post.url }}#disqus_thread">Comments</a></p>
   </div>
 {% endfor %}
 
