@@ -3,9 +3,6 @@
   <head>
     <meta charset="UTF-8">
     <title>thepixelguy</title>
-    <!-- The style.css file allows you to change the look of your web pages.
-         If you include the next line in all your web pages, they will all share the same look.
-         This makes it easier to make new pages for your site. -->
     <link href="/style.css" rel="stylesheet" type="text/css" media="all">
     <link href="/darkly.css" rel="stylesheet" type="text/css" media="all">
     <link rel="icon" type="image/ico" href="/favicon.ico">
@@ -14,43 +11,18 @@
   
     <div class='container'>
       
-      <div class='header'>
-        <img src='/avatar.png' style='margin-right: 20px; border-radius: 52px; border: 2px dotted #333;'>
-        <h2>you@thepixelguy:~$ <div id='blinkingcursor' style='display: inline;'>█</div></h2>
-        <p><i style='font-size: 11px;'>it is now pitch black. if you proceed, you are likely to be eaten by a grue.</i></p>
-        <div class='nav'>
-          <ul>
-            <li><a href='/'>Home</a></li>
-            <li><a href='/games'>Games</a></li>
-            <li><a href='/blog'>Blog</a></li>
-            <li><a href='/contact'>Contact</a></li>
-          </ul>
-        </div>
-      </div>
+      {% include header.html %}
       
       <h2><a href='{{ page.url }}'>{{ page.title }}</a></h2>
       <small><i style='color: #aaa;'>Posted on {{ page.date | date_to_string }} by {{ page.author }}</i></small>
 
       <div markdown="1">{{ page.content | markdownify }}</div>
-
       
-      <div class='footer'>Copyright &copy; 2015 Mike Burns</div>
+      {% include footer.html %}
 
     </div>
   
-    
   </body>
 </html>
 
-<script type='text/javascript'>
-  
-  function flash() {
-    var text = document.getElementById('blinkingcursor');
-    text.style.color = (text.style.color=='black') ? 'white':'black';
-  }
-  
-  setInterval(flash, 700);
-  
-</script>
-
-
+{% include scripts.html %}
