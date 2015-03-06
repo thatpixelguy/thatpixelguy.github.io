@@ -77,7 +77,7 @@ body {
   margin-top: 16px;
 }
 
-#textarea {
+textarea {
   background-color: #000;
   color: #bbb;
 }
