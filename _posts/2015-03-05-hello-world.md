@@ -31,7 +31,7 @@ print("Hello, world!")
 And here's a table!
 
 | ID | Superhero     | Alias         | Place of Birth |
-|  0 | ------------- | ------------- | -------------- |
+| -- | ------------- | ------------- | -------------- |
 |  1 | Batman        | Bruce Wayne   | Gotham         |
 |  2 | Superman      | Clark Kent    | Krypton        |
 |  3 | Wonder Woman  | Diana Prince  | Themyscira     |
