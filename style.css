@@ -73,13 +73,13 @@ body {
   max-width: 470px;
 }
 
-.disqus_thread {
+#disqus_thread {
   margin-top: 16px;
 }
 
-textarea {
-  background-color: #000;
-  color: #bbb;
+#disqus_thread textarea {
+  background-color: #000 !important;
+  color: #bbb !important;
 }
 
 .footer {
