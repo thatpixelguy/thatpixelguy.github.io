@@ -1,0 +1,29 @@
+---
+layout: default
+published: true
+---
+
+<h2>Blog</h2>
+
+{% for post in site.posts %}
+  <div class='post'>
+    <h3><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></h3>
+    <small style='color: #777;'>{{ post.date | date: "%B %-d, %Y" }} | {{ post.author }} | <img src='/comments.png' height=12 /> <a href="{{ BASE_PATH }}{{ post.url }}#disqus_thread">Comments</a></small>
+    <p>{{ post.content | markdownify }}</p>
+    <p style='font-size: 11px;'></p>
+  </div>
+{% endfor %}
+
+
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'thepixelguy';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
