@@ -6,11 +6,11 @@ redcarpet:
 #pygments: true
 url: http://thepixelguy.com
 
-pages:
-  permalink: pretty
+#pages:
+#  permalink: pretty
 
-posts:
-  permalink: /blog/:categories/:year/:month/:day/:title.html
+#posts:
+#  permalink: /blog/:categories/:year/:month/:day/:title.html
 
 
 defaults:
