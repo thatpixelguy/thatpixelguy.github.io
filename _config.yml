@@ -6,6 +6,13 @@ redcarpet:
 #pygments: true
 url: http://thepixelguy.com
 
+pages:
+  permalink: pretty
+
+posts:
+  permalink: /blog/:categories/:year/:month/:day/:title.html
+
+
 defaults:
   -
     scope:
@@ -18,7 +25,6 @@ defaults:
     values:
       layout: "post"
       author: "Mike Burns"
-      permalink: /blog/:categories/:year/:month/:day/:title.html
  
 prose:
   metadata:
