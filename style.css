@@ -92,7 +92,7 @@ section {
   position: relative;
   height: 100%;
   float: left;
-  margin-left: -85px;
+  margin-left: -100px;
 }
 
 .box img {
@@ -102,7 +102,7 @@ section {
 
 .textbox {
   width: 440px;
-  background-color: rgba(14, 16, 15, 0.9);
+  background-color: rgba(16, 18, 17, 0.875);
   padding: 30px 40px;
   text-align: center;
   float: left;
