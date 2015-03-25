@@ -80,7 +80,7 @@ section {
 .main {
   position: relative;
   left: 0px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   clear: both;
   height: auto;
 }
@@ -110,10 +110,9 @@ section {
   z-index: 1;
 }
 
-
 .footer {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   width: 100%;
 }
 
