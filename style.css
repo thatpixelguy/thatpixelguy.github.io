@@ -69,8 +69,12 @@ section {
     width: 100%;
     margin: auto;
     padding: 10px;
+
     display: flex;
     align-items: center;
+
+    display: -webkit-flex;
+    -webkit-align-items: center;
 }
 
 .main {
