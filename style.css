@@ -1,20 +1,18 @@
-/* CSS is how you can add style to your website, such as colors, fonts, and positioning of your
-   HTML content. To learn how to do something, just try searching Google for questions like
-   "how to change link color." */
 
 body {
-  background-color: #171717;
+  background-color: #000;
   color: #bbb;
   font-family: Consolas, Menlo, "Lucida Console", Monaco, monospace;
 }    
 
 .container {
-  width: 500px;
-  margin: 20px auto;
-  background-color: #000;
+  width: 800px;
+  margin: 0px auto;
+  /*background-color: #000;
   padding: 64px;
   border-radius: 128px;
   border: 20px dashed #171717;
+  */
 }
 
 .container img {
@@ -23,64 +21,96 @@ body {
 
 .header {
   width: 100%;
-  height: 150px;
+  text-align: center;
+  font-size: 48px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
-.header img {
-  float: left;
-}
-
-.nav {
+.sidebar {
   display: table;
   width: 100%;
   border-collapse: collapse;
   border: none;
-  margin-bottom: 15px;
-  background-color: rgb(150, 200, 0);
+  margin-top: 15px;
+
 }
 
-.nav ul {
-  display: table-row;
+.sidebar ul {
+  width: 100%;
   list-style-type: none;
   padding: 0;
   margin: 0 auto;
-}
-
-.nav a:link, .nav a:visited {
-  display: table-cell;
-  padding: 4px 16px;
-  background-color: rgb(150, 200, 0);
-  color: #000;
-  float: left;
   text-align: center;
 }
 
-.nav a:hover {
-  background-color: rgb(200, 255, 0);
+.sidebar li {
+  display: inline;
 }
 
-.nav a:active {
+.sidebar a:link, .sidebar a:visited {
+  padding: 15px 20px;
+  text-align: center;
+  color: white;
+  font-weight: normal;
+  font-size: 20px;
+}
+
+.sidebar a:hover {
+  background-color: rgb(200, 255, 0);
+  color: black;
+}
+
+.sidebar a:active {
   background-color: rgb(255, 255, 255);
 }
 
-.post {
-  border-top: 8px solid #171717;
-  margin-top: 12px;
-  margin-bottom: 12px;
-  padding-top: 8px;
+section {
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+    display: flex;
+    align-items: center;
 }
 
-.post img {
-  max-width: 470px;
+.main {
+  position: relative;
+  left: 0px;
+  margin-bottom: 50px;
+  clear: both;
+  height: auto;
 }
 
-#disqus_thread {
-  margin-top: 16px;
+.box {
+  float: left;
+  width: 400px;
+  z-index: 0;
+  position: relative;
+  height: 100%;
+  float: left;
+  margin-left: -50px;
 }
+
+.box img {
+  max-width: 426px;
+  z-index: -1;
+}
+
+.textbox {
+  width: 440px;
+  background-color: rgba(14, 16, 15, 0.9);
+  padding: 30px 40px;
+  text-align: center;
+  float: left;
+  position: relative;
+  z-index: 1;
+}
+
 
 .footer {
   text-align: center;
-  margin-top: 16px;
+  margin: 32px 0;
+  width: 100%;
 }
 
 h1, h2, h3 {
@@ -88,7 +118,7 @@ h1, h2, h3 {
 }
 
 p {
-  line-height: 160%;
+  line-height: 175%;
 }
 
 a:link, a:visited {
