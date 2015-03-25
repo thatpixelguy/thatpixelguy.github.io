@@ -23,8 +23,8 @@ body {
   width: 100%;
   text-align: center;
   font-size: 48px;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .sidebar {
@@ -113,7 +113,7 @@ section {
 
 .footer {
   text-align: center;
-  margin: 32px 0;
+  margin: 24px 0;
   width: 100%;
 }
 
