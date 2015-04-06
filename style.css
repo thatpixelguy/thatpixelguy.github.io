@@ -66,6 +66,10 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
+h1 {
+  letter-spacing: 16px;
+}
+
 section {
     width: 100%;
     margin: auto;
