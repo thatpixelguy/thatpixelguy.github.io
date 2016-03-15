@@ -267,11 +267,15 @@ class Shape
             var x2 = Math.min(viewportWidth - 1, ((o2.x + 1) * 0.5 * viewportWidth)); 
             var y2 = Math.min(viewportHeight - 1, ((1 - (o2.y + 1) * 0.5) * viewportHeight));
 
-            var percentageBack = Math.max(((p1.z + p2.z) / 2) - 10.3, 0);
-            var color = Math.floor(percentageBack * 255);
+            var color1 = Math.floor(Math.max(p1.z - 10.3, 0) * 255);
+            var color2 = Math.floor(Math.max(p2.z - 10.3, 0) * 255);
+
+            var gradient = context.createLinearGradient(x1, y1, x2, y2);
+            gradient.addColorStop(0, "rgb(" + color1 + "," + color1 + "," + color1 + ")");
+            gradient.addColorStop(1, "rgb(" + color2 + "," + color2 + "," + color2 + ")");
 
             //console.log(percentageBack);
-            drawLine(x1, y1, x2, y2, "rgb(" + color + ", " + color + ", " + color + ")");
+            drawLine(x1, y1, x2, y2, gradient);
         }
     }
 }
@@ -310,7 +314,7 @@ function init()
         [[-1, -1, -1], [-1, 1, -1]]
     ]);
 
-    cube.scale(1);
+    cube.scale(1.25);
 
     console.log(tetrahedron);
 
