@@ -3,13 +3,13 @@
 var canvas = null;
 var context = null;
 
-var viewportWidth = 500;
-var viewportHeight = 500;
+var viewportWidth;
+var viewportHeight;
 
-var fov = 60;
+var fov  = 60;
 var near = 0.1;
-var far = 1000;
-var s = 1 / Math.tan(fov * 0.5 * Math.PI / 180);
+var far  = 1000;
+var s    = 1 / Math.tan(fov * 0.5 * Math.PI / 180);
 
 var perspectiveMatrix = [
     [s, 0, 0, 0],
@@ -22,6 +22,11 @@ function setWorkingCanvas(name)
 {
     canvas = document.getElementById(name);
     context = canvas.getContext('2d');
+
+    context.lineWidth = 3;
+
+    viewportWidth = canvas.width;
+    viewportHeight = canvas.height;
 }
 
 function drawLine(x1, y1, x2, y2, color)
@@ -95,22 +100,25 @@ class Shape
 
             var w;
 
-            var o1 = matrix44MultiplyVector3(perspectiveMatrix, p1);
-            var o2 = matrix44MultiplyVector3(perspectiveMatrix, p2);
+            var projPoint1 = matrix44MultiplyVector3(perspectiveMatrix, p1);
+            var projPoint2 = matrix44MultiplyVector3(perspectiveMatrix, p2);
 
             // don't draw line segments that are outside the screen's boundaries
-            if((o1[0] < -1 || o1[0] > 1 || o1[1] < -1 || o1[1] > 1) &&
-               (o2[0] < -1 || o2[0] > 1 || o2[1] < -1 || o2[1] > 1))
+            if((projPoint1[0] < -1 || projPoint1[0] > 1 || projPoint1[1] < -1 || projPoint1[1] > 1) &&
+               (projPoint2[0] < -1 || projPoint2[0] > 1 || projPoint2[1] < -1 || projPoint2[1] > 1))
                 continue;
 
-            var x1 = Math.min(viewportWidth  - 1, ((o1[0] + 1) * 0.5 * viewportWidth)); 
-            var y1 = Math.min(viewportHeight - 1, ((1 - (o1[1] + 1) * 0.5) * viewportHeight));
+            // Convert the normalized coordinates (-1.0 to 1.0) to pixel-space
+            var x1 = Math.min(viewportWidth  - 1, ((projPoint1[0] + 1) * 0.5 * viewportWidth)); 
+            var y1 = Math.min(viewportHeight - 1, ((1 - (projPoint1[1] + 1) * 0.5) * viewportHeight));
+            var x2 = Math.min(viewportWidth  - 1, ((projPoint2[0] + 1) * 0.5 * viewportWidth)); 
+            var y2 = Math.min(viewportHeight - 1, ((1 - (projPoint2[1] + 1) * 0.5) * viewportHeight));
 
-            var x2 = Math.min(viewportWidth  - 1, ((o2[0] + 1) * 0.5 * viewportWidth)); 
-            var y2 = Math.min(viewportHeight - 1, ((1 - (o2[1] + 1) * 0.5) * viewportHeight));
-
-            var color1 = Math.floor(Math.max(p1[2] - 10.3, 0) * 255);
-            var color2 = Math.floor(Math.max(p2[2] - 10.3, 0) * 255);
+            // Fade out lines that are farther away to enhance illusion of depth.
+            var threshold = -0.1;
+            var depth = 11;
+            var color1 = Math.floor(Math.max(threshold + (p1[2] / depth), 0) * 255);
+            var color2 = Math.floor(Math.max(threshold + (p2[2] / depth), 0) * 255);
 
             var gradient = context.createLinearGradient(x1, y1, x2, y2);
             gradient.addColorStop(0, "rgb(" + color1 + "," + color1 + "," + color1 + ")");
@@ -121,8 +129,9 @@ class Shape
     }
 }
 
-
+var angle = 0;
 var tetrahedron, cube;
+
 function init()
 {
     tetrahedron = new Shape([
@@ -157,27 +166,20 @@ function init()
     ]);
 
     cube.scale(1.25);
-
-    console.log(tetrahedron);
-
-    cube.draw(0, 0, 10, 2);
+    tetrahedron.scale(0.75);
 
     toggleAnimation();
 }
-
-var angle = 0;
 
 function draw()
 {
     angle += 0.01;
 
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = "white";
+    context.fillRect(0, 0, canvas.width, canvas.height);
 
-    var amt = 0;
-    context.translate(amt, amt);
-    cube.draw(0, 0, 10, angle);
-    tetrahedron.draw(-4, 0, 10, angle * 3);
-    context.translate(-amt, -amt);
+    cube.draw(2, 2, 10, angle);
+    tetrahedron.draw(-1, -1, 4, angle * 3);
 
 }
 
@@ -190,5 +192,5 @@ function toggleAnimation()
         intervalId = null;
     }
     else
-        intervalId = window.setInterval(draw, 20);
+        intervalId = window.setInterval(draw, 16);
 }

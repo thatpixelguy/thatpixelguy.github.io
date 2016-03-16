@@ -16,18 +16,18 @@ function matrixAdd(m1, m2)
 
 function matrixMultiply(m1, m2)
 {
-    var product = [];
+    var m1w = m1[0].length;
+    var m1h = m1.length;
+    var m2w = m2[0].length;
+    var m2h = m2.length;
 
-    if(m1[0].length != m2.length)
+    if(m1w != m2h)
     {
         console.log("ERROR: Matrix multiplication doesn't make sense!");
         return null;
     }
 
-    var m1w = m1[0].length;
-    var m1h = m1.length;
-    var m2w = m2[0].length;
-    var m2h = m2.length;
+    var product = [];
 
     for(var i = 0; i < m1h; i++)
     {
@@ -58,6 +58,12 @@ function matrixMultiplyVector(matrix, vector)
 
     var mw = matrix[0].length;
     var mh = matrix.length;
+
+    if(mw != vector.length)
+    {
+        console.log("ERROR: Matrix-vector multiplication doesn't make sense!");
+        return null;
+    }
 
     for(var i = 0; i < mh; i++)
     {
