@@ -92,6 +92,27 @@ function matrixScale(matrix, scalar)
     return scaled;
 }
 
+function vectorNormalize(vector)
+{
+    var normalized = [];
+    var dist = vectorLength(vector);
+    if(dist == 1)
+        return vector;
+
+    for(var i = 0; i < vector.length; i++)
+        normalized[i] = vector[i] / dist;
+    
+    return normalized;
+}
+
+function vectorLength(vector)
+{
+    var distSquared = 0;
+    for(var i = 0; i < vector.length; i++)
+        distSquared += vector[i]*vector[i];
+    return Math.sqrt(distSquared);
+}
+
 function vectorAdd(v1, v2)
 {
     sum = [];
@@ -108,7 +129,13 @@ function vectorScale(vector, scalar)
     return scaled;
 }
 
-function matrix44MultiplyVector3(matrix44, vector3)
+function matrix44MultiplyVector3(matrix44, vector3, w)
+{
+    var vector4 = vector3.concat([w]);
+    return matrixMultiplyVector(matrix44, vector4);
+}
+
+function transformCoordinate(matrix44, vector3)
 {
     var product = [0, 0, 0];
     product[0] = vector3[0] * matrix44[0][0] + vector3[1] * matrix44[1][0] + vector3[2] * matrix44[2][0] + matrix44[3][0];
