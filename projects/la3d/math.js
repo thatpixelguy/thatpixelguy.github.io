@@ -101,7 +101,7 @@ function vectorNormalize(vector)
 
     for(var i = 0; i < vector.length; i++)
         normalized[i] = vector[i] / dist;
-    
+
     return normalized;
 }
 
@@ -119,6 +119,14 @@ function vectorAdd(v1, v2)
     for(var i = 0; i < v1.length; i++)
         sum[i] = v1[i] + v2[i];
     return sum;
+}
+
+function vectorSubtract(v1, v2)
+{
+    difference = [];
+    for(var i = 0; i < v1.length; i++)
+        difference[i] = v1[i] - v2[i];
+    return difference;
 }
 
 function vectorScale(vector, scalar)
