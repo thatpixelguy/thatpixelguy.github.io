@@ -111,6 +111,12 @@ function drawTriangle(imageData, a, b, c, color)
         c = temp;
     }
 
+    // We want the coordinates of each point on the triangle to be integers.
+    // Otherwise, we'll see ugly artifacts along the edges.
+    a[0] = Math.floor(a[0]); a[1] = Math.floor(a[1]);
+    b[0] = Math.floor(b[0]); b[1] = Math.floor(b[1]);
+    c[0] = Math.floor(c[0]); c[1] = Math.floor(c[1]);
+
     // Calculate the slope of each edge of the triangle.
     var abSlope = (a[1] - b[1]) / (a[0] - b[0]);
     var acSlope = (a[1] - c[1]) / (a[0] - c[0]);
@@ -150,7 +156,7 @@ function drawTriangle(imageData, a, b, c, color)
         var d2 = vectorSubtract(a, c);
         var normal = [d1[1]*d2[2] - d1[2]*d2[1], -(d1[0]*d2[2] - d1[2]*d2[0]), d1[0]*d2[1] - d1[1]*d2[0]];
 
-        for(var x = x1; x < x2; x++)
+        for(var x = Math.floor(x1); x <= Math.floor(x2); x++)
         {
             // Remember that the equation of a plane is normalVector * <x - x1, y - y1, z - z1> = 0. We know
             // x and y, and we can use A for the point <x1, y1, z1>. The only remaining unknown is z,

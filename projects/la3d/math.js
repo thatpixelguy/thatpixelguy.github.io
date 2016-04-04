@@ -137,6 +137,14 @@ function vectorScale(vector, scalar)
     return scaled;
 }
 
+function vectorFloor(vector)
+{
+    floored = [];
+    for(var i = 0;i < vector.length; i++)
+        floored[i] = Math.floor(vector[i]);
+    return floored;
+}
+
 function matrix44MultiplyVector3(matrix44, vector3, w)
 {
     var vector4 = vector3.concat([w]);
