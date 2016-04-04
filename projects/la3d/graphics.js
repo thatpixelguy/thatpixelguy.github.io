@@ -17,25 +17,26 @@ var depthBuffer;
 var perspectiveMatrix = [
     [s, 0, 0, 0],
     [0, s, 0, 0],
-    [0, 0, far / (far - near), 1],
-    [0, 0, (far * near) / (far - near), 0]
+    [0, 0, -far / (far - near), -1],
+    [0, 0, -far * near / (far - near), 0]
 ];
 
 // This cube consists of 12 triangles, with 2 triangles forming each of the 6 faces.
 var cubeTriangles = [
-    // bottom face
-    [[-1, -1,  1], [ 1, -1,  1], [ 1, -1, -1]],
-    [[ 1, -1, -1], [-1, -1, -1], [-1, -1,  1]],
 
     // top face
     [[-1,  1,  1], [ 1,  1,  1], [ 1,  1, -1]],
     [[ 1,  1, -1], [-1,  1, -1], [-1,  1,  1]],
 
-    // back face
+    // bottom face
+    [[-1, -1,  1], [ 1, -1,  1], [ 1, -1, -1]],
+    [[ 1, -1, -1], [-1, -1, -1], [-1, -1,  1]],
+
+    // front face
     [[-1, -1,  1], [-1,  1,  1], [ 1,  1,  1]],
     [[ 1,  1,  1], [ 1, -1,  1], [-1, -1,  1]],
 
-    // front face
+    // back face
     [[-1, -1, -1], [-1,  1, -1], [ 1,  1, -1]],
     [[ 1,  1, -1], [ 1, -1, -1], [-1, -1, -1]],
 
@@ -51,8 +52,8 @@ var cubeTriangles = [
 var cubeColors = [
     [255,   0,   0], [255,   0,   0], // bottom face color
     [  0, 255,   0], [  0, 255,   0], // top face color
-    [  0,   0, 255], [  0,   0, 255], // back face color
-    [255, 255,   0], [255, 255,   0], // front face color
+    [  0,   0, 255], [  0,   0, 255], // front face color
+    [255, 255,   0], [255, 255,   0], // back face color
     [  0, 255, 255], [  0, 255, 255], // left face color
     [255,   0, 255], [255,   0, 255]  // right face color
 ];
@@ -161,7 +162,7 @@ function drawTriangle(imageData, a, b, c, color)
             var yi = Math.floor(y);
 
             // Now, we only draw the new pixel if it's nearer to the camera than the existing pixel.
-            if(z >= depthBuffer[yi][xi])
+            if(z <= depthBuffer[yi][xi])
             {
                 var i = (imageData.width * yi + xi) * 4;
                 imageData.data[i + 0] = color[0];
@@ -246,7 +247,7 @@ function drawTriangle3D(triangles, colors, transform, imageData)
         var projB = transformCoordinate(perspectiveMatrix, b);
         var projC = transformCoordinate(perspectiveMatrix, c);
 
-        // don't draw line segments that are outside the screen's boundaries
+        // don't draw triangles that are outside the screen's boundaries
         if((projA[0] < -1 || projA[0] > 1 || projA[1] < -1 || projA[1] > 1) &&
            (projB[0] < -1 || projB[0] > 1 || projB[1] < -1 || projB[1] > 1) &&
            (projC[0] < -1 || projC[0] > 1 || projC[1] < -1 || projC[1] > 1))
@@ -271,7 +272,7 @@ function createDepthBuffer(width, height)
         depthBuffer[y] = [];
         for(var x = 0; x < width; x++)
         {
-            depthBuffer[y][x] = 0;
+            depthBuffer[y][x] = Infinity;
         }
     }
 }
@@ -280,7 +281,7 @@ function clearDepthBuffer()
 {
     for(var y = 0; y < depthBuffer.length; y++)
         for(var x = 0; x < depthBuffer[0].length; x++)
-            depthBuffer[y][x] = 0;
+            depthBuffer[y][x] = Infinity;
 }
 
 function init()
@@ -301,13 +302,13 @@ function draw()
     clearDepthBuffer();
 
     var T = getIdentityMatrix();
-    T = translate(T, 0, 1, 10);
+    T = translate(T, 0, 1, -10);
     T = rotate(T, angle, 1, 0, 0);
     T = rotate(T, angle, 0, 1, 0);
     drawTriangle3D(tetrahedronTriangles, tetrahedronColors, T, imageData);
 
     T = getIdentityMatrix();
-    T = translate(T, 0, -1, 7);
+    T = translate(T, 1, -1, -7);
     T = rotate(T, angle, 0, 0, 1);
     T = rotate(T, angle, 0, 1, 0);
     drawTriangle3D(cubeTriangles, cubeColors, T, imageData);
