@@ -2,27 +2,51 @@
 <html>
 
   <head>
-    <title>Linear Algebra: 3D Awesomeness!</title>
+    <title>Linear Algebra: 3D Rasterizer</title>
     <script type="text/javascript" src="math.js"></script>
     <script type="text/javascript" src="graphics.js"></script>
-    <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
 
     <style>
       body {
         margin: 0px;
         padding: 0px;
-        margin: 40px auto;
         background-color: #f0f0f0;
+        font-family: 'Consolas', 'Menlo', 'Courier New';
       }
 
-      h1, h2, h3 {
-        font-family: 'Permanent Marker', cursive;
-        font-weight: normal;
-      }
 
-      h1 {
-        font-size: 40px;
-      }
+#wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding: 0;
+}
+
+#left {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  min-width: 500px;
+  background-color: #000;
+
+}
+
+#right {
+  float: right;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  min-left: 500px;
+}
+
+li {
+  margin-top: 20px;
+}
+
 
     </style>
 
@@ -30,10 +54,31 @@
 
 
   <body>
-    <center>
-      <h1>Linear Algebra: 3D Awesomeness!</h1>
-      <canvas id="3d" width="500" height="500" style="border-radius: 16px; border: 0px solid #eee; box-shadow: 8px 8px 20px #aaa;"></canvas>
-    </center>
+
+  <div id="wrapper">
+    <div id="left">
+      <center>
+        <div style="height: 100%;">
+        <canvas id="3d" width="500" height="500"</canvas>
+        </div>
+      </center>
+    </div>
+    <div id="right">
+      <div style='padding: 30px;'>
+        <h1>3D Rasterizer</h1>
+        <p>Created by Michael Burns</p>
+        <p>The basic algorithm is as follows:</p>
+        <ol>
+          <li>Define the vertices for a bunch of triangles in 3D space. These form the shape of the 3D object.</li>
+          <li>Create a 4x4 transformation matrix for the 3D object. For example, if we want to rotate the object and shift it away from the origin, we multiply the identity matrix by rotation and translation matrices.</li>
+          <li>Loop through each triangle in the object, then multiply the translation matrix by each of the triangle's vertices. Then we multiply the results by a perspective matrix, and the three resulting vectors contain the coordinates of the triangle projected onto our screen.</li>
+          <li>Now that we have our projected coordinates, we need to rasterize the triangle into pixels. Starting at the topmost vertex of the triangle, we iterate through each integer y value of the triangle. Given the current y value, we calculate the x values of the leftmost and rightmost edges of the triangle, then draw a horizontal line of pixels from end to end.</li>
+          <li>We also keep track of the Z-value of each pixel and only draw over an existing pixel if the new pixel is closer to the screen. (This is called Z-buffering.)</li>
+        </ol>
+        <p><b>Source files: <a href='graphics.js'>graphics.js</a> | <a href='math.js'>math.js</a></b></p>
+      </div>
+    </div>
+    
 
     <script type="text/javascript">
       setWorkingCanvas("3d");
@@ -42,4 +87,4 @@
 
   </body>
 
-</html>   
+</html>  
