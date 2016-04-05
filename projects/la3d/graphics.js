@@ -339,7 +339,7 @@ function draw()
 {
     angle += 0.01;
 
-    context.fillStyle = "white";
+    context.fillStyle = "black";
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     imageData = context.getImageData(0, 0, canvas.width, canvas.height);
