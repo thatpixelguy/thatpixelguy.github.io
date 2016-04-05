@@ -66,10 +66,10 @@ var tetrahedronTriangles = [
 ];
 
 var tetrahedronColors = [
+    [255, 150,   0],
     [255,   0,   0],
     [  0, 255,   0],
-    [  0,   0, 255],
-    [255, 150,   0]
+    [  0,   0, 255]
 ]
 
 function setWorkingCanvas(name)
@@ -85,12 +85,24 @@ function setWorkingCanvas(name)
     createDepthBuffer(viewportWidth, viewportHeight);
 }
 
+function orient2d(a, b, c)
+{
+    return (b[0] - a[0])*(c[1] - a[1]) - (b[1] - a[1])*(c[0]-a[0]);
+}
+
+function edgeFunction(a, b, c) 
+{
+    return (c[0] - a[0]) * (b[1] - a[1]) - (c[1] - a[1]) * (b[0] - a[0]);
+} 
+
+
 function drawTriangle(imageData, a, b, c, color)
 {
     // Sort the points. We want a.y < b.y < c.y. Note that (0, 0) is the topleft
     // of the screen, so a will be the highest point, then b, then c. Since we're
     // sorting them this way, we know the highest y value will always be a.y, and
     // the lowest y value will always be c.y. This simplifies our algorithm quite a bit!
+
     var temp;
     if(a[1] > b[1])
     {
@@ -121,6 +133,20 @@ function drawTriangle(imageData, a, b, c, color)
     var abSlope = (a[1] - b[1]) / (a[0] - b[0]);
     var acSlope = (a[1] - c[1]) / (a[0] - c[0]);
     var bcSlope = (b[1] - c[1]) / (b[0] - c[0]);
+
+    // We need the points of the triangle in a counter-clockwise order,
+    // so we find them below and assign them to v0, v1, and v2.
+    var v0 = a;
+    var v1 = b;
+    var v2 = c;
+    var det = a[0]*b[1] + b[0]*c[1] + c[0]*a[1] - b[1]*c[0] - c[1]*a[0] - a[1]*b[0];
+    if(det >= 0)
+    {
+        v1 = c;
+        v2 = b;
+    }
+
+    var area = edgeFunction(v0, v1, v2);
 
     // Now we'll draw each horizontal line of the triangle.
     for(var y = a[1]; y < c[1]; y++)
@@ -161,20 +187,31 @@ function drawTriangle(imageData, a, b, c, color)
             // Remember that the equation of a plane is normalVector * <x - x1, y - y1, z - z1> = 0. We know
             // x and y, and we can use A for the point <x1, y1, z1>. The only remaining unknown is z,
             // so we solve for z:
-            var z = (-normal[0]*(x - a[0]) - normal[1]*(y - a[1])) / normal[2] + a[2];
+            //var z = (-normal[0]*(x - a[0]) - normal[1]*(y - a[1])) / normal[2] + a[2];
 
-            // integer values of x and y. We need these to act as indices for the pixel and z-buffer data.
-            var xi = Math.floor(x);
-            var yi = Math.floor(y);
+            var p = [x, y];
+            var w0 = edgeFunction(v1, v2, p);
+            var w1 = edgeFunction(v2, v0, p);
+            var w2 = edgeFunction(v0, v1, p);
 
             // Now, we only draw the new pixel if it's nearer to the camera than the existing pixel.
-            if(z <= depthBuffer[yi][xi])
+            if(w0 >= 0 && w1 >= 0 && w2 >= 0) //z < depthBuffer[y][x])
             {
-                var i = (imageData.width * yi + xi) * 4;
-                imageData.data[i + 0] = color[0];
-                imageData.data[i + 1] = color[1];
-                imageData.data[i + 2] = color[2];
-                depthBuffer[yi][xi] = z;
+                w0 /= area;
+                w1 /= area;
+                w2 /= area;
+
+                var oneOverZ = v0[2]*w0 + v1[2]*w1 + v2[2]*w2;
+                var z = -1 / oneOverZ;
+
+                if(z < depthBuffer[y][x])
+                {
+                    var i = (imageData.width * y + x) * 4;
+                    imageData.data[i + 0] = color[0];
+                    imageData.data[i + 1] = color[1];
+                    imageData.data[i + 2] = color[2];
+                    depthBuffer[y][x] = z;
+                }
             }
         }
     }
@@ -221,6 +258,17 @@ function translate(transform, x, y, z)
         [1, 0, 0, x],
         [0, 1, 0, y],
         [0, 0, 1, z],
+        [0, 0, 0, 1]
+    ];
+    return matrixMultiply(transform, T);
+}
+
+function scale(transform, x, y, z)
+{
+    var T = [
+        [x, 0, 0, 0],
+        [0, y, 0, 0],
+        [0, 0, z, 0],
         [0, 0, 0, 1]
     ];
     return matrixMultiply(transform, T);
@@ -311,6 +359,8 @@ function draw()
     T = translate(T, 0, 1, -10);
     T = rotate(T, angle, 1, 0, 0);
     T = rotate(T, angle, 0, 1, 0);
+    drawTriangle3D(cubeTriangles, cubeColors, T, imageData);
+    T = scale(T, 2, 2, 2);
     drawTriangle3D(tetrahedronTriangles, tetrahedronColors, T, imageData);
 
     T = getIdentityMatrix();
