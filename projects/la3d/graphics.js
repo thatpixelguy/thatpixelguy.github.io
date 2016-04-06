@@ -11,7 +11,7 @@ var near = 0.1;
 var far  = 100;
 var s    = 1 / Math.tan(fov * 0.5 * Math.PI / 180);
 
-var imageData;
+var imageData, blankImageData;
 var depthBuffer;
 
 var perspectiveMatrix = [
@@ -83,6 +83,16 @@ function setWorkingCanvas(name)
     viewportHeight = canvas.height;
 
     createDepthBuffer(viewportWidth, viewportHeight);
+    blankImageData = context.createImageData(viewportWidth, viewportHeight);
+    imageData = imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
+    for(var i = 0; i < viewportWidth * viewportHeight * 4; i += 4)
+    {
+        blankImageData.data[i] = 0;
+        blankImageData.data[i + 1] = 0;
+        blankImageData.data[i + 2] = 0;
+        blankImageData.data[i + 3] = 255;
+    }
 }
 
 function edgeFunction(a, b, c) 
@@ -342,8 +352,9 @@ function draw()
     context.fillStyle = "black";
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    //imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     clearDepthBuffer();
+    imageData.data.set(blankImageData.data);
 
     var T = getIdentityMatrix();
     T = translate(T, 0, 0, -5);
