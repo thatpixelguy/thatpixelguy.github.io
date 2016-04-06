@@ -185,10 +185,6 @@ function drawTriangle(imageData, a, b, c, color)
             var w1 = edgeFunction(v2, v0, p);
             var w2 = edgeFunction(v0, v1, p);
 
-            var edge0 = vectorSubtract(v2, v1);
-            var edge1 = vectorSubtract(v0, v2);
-            var edge2 = vectorSubtract(v1, v0);
-
             if(w0 >= 0 && w1 >= 0 && w2 >= 0) //z < depthBuffer[y][x])
             {
                 w0 /= area;
