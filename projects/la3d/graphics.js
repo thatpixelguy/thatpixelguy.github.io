@@ -8,7 +8,7 @@ var viewportHeight;
 
 var fov  = 60;
 var near = 0.1;
-var far  = 1000;
+var far  = 100;
 var s    = 1 / Math.tan(fov * 0.5 * Math.PI / 180);
 
 var imageData;
@@ -120,9 +120,9 @@ function drawTriangle(imageData, a, b, c, color)
 
     // We want the coordinates of each point on the triangle to be integers.
     // Otherwise, we'll see ugly artifacts along the edges.
-    a[0] = Math.floor(a[0]); a[1] = Math.floor(a[1]);
-    b[0] = Math.floor(b[0]); b[1] = Math.floor(b[1]);
-    c[0] = Math.floor(c[0]); c[1] = Math.floor(c[1]);
+    //a[0] = Math.floor(a[0]); a[1] = Math.floor(a[1]);
+    //b[0] = Math.floor(b[0]); b[1] = Math.floor(b[1]);
+    //c[0] = Math.floor(c[0]); c[1] = Math.floor(c[1]);
 
     // Calculate the slope of each edge of the triangle.
     var abSlope = (a[1] - b[1]) / (a[0] - b[0]);
@@ -152,7 +152,7 @@ function drawTriangle(imageData, a, b, c, color)
     var area = edgeFunction(v0, v1, v2);
 
     // Now we'll draw each horizontal line of the triangle.
-    for(var y = a[1]; y < c[1]; y++)
+    for(var y = Math.floor(a[1]); y <= Math.floor(c[1]); y++)
     {
         // First, we determine the x values of each end of the strip of the triangle
         // we're drawing. Because we sorted the points of the triangle by height alphabetically,
@@ -184,6 +184,10 @@ function drawTriangle(imageData, a, b, c, color)
             var w0 = edgeFunction(v1, v2, p);
             var w1 = edgeFunction(v2, v0, p);
             var w2 = edgeFunction(v0, v1, p);
+
+            var edge0 = vectorSubtract(v2, v1);
+            var edge1 = vectorSubtract(v0, v2);
+            var edge2 = vectorSubtract(v1, v0);
 
             if(w0 >= 0 && w1 >= 0 && w2 >= 0) //z < depthBuffer[y][x])
             {
