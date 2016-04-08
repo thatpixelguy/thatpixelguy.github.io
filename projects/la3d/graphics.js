@@ -17,8 +17,8 @@ var depthBuffer;
 var perspectiveMatrix = [
     [s, 0, 0, 0],
     [0, s, 0, 0],
-    [0, 0, -far / (far - near), -1],
-    [0, 0, -far * near / (far - near), 0]
+    [0, 0, -far / (far - near), -far * near / (far - near)],
+    [0, 0, -1, 0]
 ];
 
 // This cube consists of 12 triangles, with 2 triangles forming each of the 6 faces.
@@ -77,8 +77,6 @@ function setWorkingCanvas(name)
     canvas = document.getElementById(name);
     context = canvas.getContext('2d');
 
-    context.lineWidth = 2;
-
     viewportWidth = canvas.width;
     viewportHeight = canvas.height;
 
@@ -100,50 +98,10 @@ function edgeFunction(a, b, c)
     return (c[0] - a[0])*(b[1] - a[1]) - (c[1] - a[1])*(b[0] - a[0]);
 } 
 
-
 function drawTriangle(imageData, a, b, c, color)
 {
-    // Sort the points. We want a.y < b.y < c.y. Note that (0, 0) is the topleft
-    // of the screen, so a will be the highest point, then b, then c. Since we're
-    // sorting them this way, we know the highest y value will always be a.y, and
-    // the lowest y value will always be c.y. This simplifies our algorithm quite a bit!
-
-    var temp;
-    if(a[1] > b[1])
-    {
-        temp = a;
-        a = b;
-        b = temp;
-    }
-    if(a[1] > c[1])
-    {
-        temp = a;
-        a = c;
-        c = temp;
-    }
-    if(b[1] > c[1])
-    {
-        temp = b;
-        b = c;
-        c = temp;
-    }
-
-    // We want the coordinates of each point on the triangle to be integers.
-    // Otherwise, we'll see ugly artifacts along the edges.
-    //a[0] = Math.floor(a[0]); a[1] = Math.floor(a[1]);
-    //b[0] = Math.floor(b[0]); b[1] = Math.floor(b[1]);
-    //c[0] = Math.floor(c[0]); c[1] = Math.floor(c[1]);
-
-    // Calculate the slope of each edge of the triangle.
-    var abSlope = (a[1] - b[1]) / (a[0] - b[0]);
-    var acSlope = (a[1] - c[1]) / (a[0] - c[0]);
-    var bcSlope = (b[1] - c[1]) / (b[0] - c[0]);
-
-    // We need to be able to access the points of the triangle in a counter-clockwise order,
-    // so we'll store the CCW order of the variables in v0, v1, and v2.
-    var v0 = a;
-    var v1 = b;
-    var v2 = c;
+    // To calculate barycentric coordinates, we need to be able to access the points of the triangle
+    // in a counter-clockwise order, so we store the CCW order of the vertices into v0, v1, and v2.
 
     // Given the matrix:
     // | ax ay 1 |
@@ -152,6 +110,9 @@ function drawTriangle(imageData, a, b, c, color)
     // If the determinant is less than zero, then the points are in CCW order (if the origin is at the topleft).
     // Otherwise, the points are in CW order, and we must swap any two points. Found this trick here:
     // http://gamedev.stackexchange.com/questions/13229/sorting-array-of-points-in-clockwise-order
+    var v0 = a;
+    var v1 = b;
+    var v2 = c;
     var det = a[0]*b[1] + b[0]*c[1] + c[0]*a[1] - b[1]*c[0] - c[1]*a[0] - a[1]*b[0];
     if(det >= 0)
     {
@@ -159,51 +120,36 @@ function drawTriangle(imageData, a, b, c, color)
         v2 = b;
     }
 
-    var area = edgeFunction(v0, v1, v2);
+    var areaABC = edgeFunction(v0, v1, v2);
 
-    // Now we'll draw each horizontal line of the triangle.
-    for(var y = Math.floor(a[1]); y <= Math.floor(c[1]); y++)
+    // Calculate the edges of the triangle's bounding box
+    var top = Math.min(a[1], b[1], c[1]);
+    var bottom = Math.max(a[1], b[1], c[1]);
+    var left = Math.min(a[0], b[0], c[0]);
+    var right = Math.max(a[0], b[0], c[0]);
+
+    // Now we iterate through each pixel within the bounding box of the triangle
+    for(var y = Math.floor(top); y <= Math.floor(bottom); y++)
     {
-        // First, we determine the x values of each end of the strip of the triangle
-        // we're drawing. Because we sorted the points of the triangle by height alphabetically,
-        // we know that if a given y on the triangle is higher than b, then the two edges will
-        // be ab and ac, and if the y value is lower than the point b, then the two edges will
-        // be bc and ac. 
-        var x1, x2;
-        if(y < b[1])
-            x1 = (y - a[1])/abSlope + a[0];
-        else
-            x1 = (y - b[1])/bcSlope + b[0];
-        x2 = (y - a[1])/acSlope + a[0];
-
-        // For algorithmic purposes, we want x1 to be to the left of x2, so we ensure this here.
-        if(x2 < x1)
+        for(var x = Math.floor(left); x <= Math.floor(right); x++)
         {
-            temp = x1;
-            x1 = x2;
-            x2 = temp;
-        }
+            // Calculate the barycentric coordinates of the point with respect to the triangle
+            var p = [x + 0.5, y + 0.5, 0];
+            var w0 = edgeFunction(v1, v2, p) / areaABC;
+            var w1 = edgeFunction(v2, v0, p) / areaABC;
+            var w2 = edgeFunction(v0, v1, p) / areaABC;
 
-        // We don't want to draw things that are very far away "in front of" nearby objects. To do this,
-        // we use a Z-buffer to store the Z-value of each pixel, and only draw over that pixel when the
-        // program finds a closer pixel.
+            // Note that any point v within the triangle v0, v1, and v2 can be described as
+            // v = w0*v0 + w1*v1 + w2*v2
+            // What is of particular use here is that if a 
 
-        for(var x = Math.floor(x1); x <= Math.floor(x2); x++)
-        {
-            var p = [x, y, 0];
-            var w0 = edgeFunction(v1, v2, p);
-            var w1 = edgeFunction(v2, v0, p);
-            var w2 = edgeFunction(v0, v1, p);
-
-            if(w0 >= 0 && w1 >= 0 && w2 >= 0) //z < depthBuffer[y][x])
+            // if the point lines on the triangle, we'll (probably) draw it...
+            if(w0 >= 0 && w1 >= 0 && w2 >= 0)
             {
-                w0 /= area;
-                w1 /= area;
-                w2 /= area;
-
-                // Now, we only draw the new pixel if it's nearer to the camera than the existing pixel.
+                // ...however, we don't want to draw things that are very far away "in front of" nearby objects. To do this,
+                // we use a Z-buffer to store the Z-value of each pixel, and only draw over an existing pixel if the
+                // program finds a closer pixel.
                 var z = -1 / (v0[2]*w0 + v1[2]*w1 + v2[2]*w2);
-
                 if(z < depthBuffer[y][x])
                 {
                     var i = (imageData.width * y + x) * 4;
@@ -231,7 +177,7 @@ function rotate(transform, angle, x, y, z)
 {
     // normalize (x, y, z) if necessary
     var distSquared = x*x + y*y + z*z;
-    if(distSquared != 1)
+    if(distSquared != 1 && distSquared != 0)
     {
         var dist = Math.sqrt(distSquared);
         x /= dist;
@@ -284,30 +230,35 @@ function convertToPixelCoordinates(normalizedPoint)
     ];
 }
 
-function drawTriangle3D(triangles, colors, transform, imageData)
+// This function will draw an array of triangles with 3D coordinates onto the screen in pixels.
+function drawAllTriangles3D(triangles, colors, transform, imageData)
 {
     for(var i = 0; i < triangles.length; i++)
     {
-        // For each edge, we have two points. First, we apply the transformation
-        // to both points.
-        var a = matrix44MultiplyVector3(transform, triangles[i][0], 1);
-        var b = matrix44MultiplyVector3(transform, triangles[i][1], 1);
-        var c = matrix44MultiplyVector3(transform, triangles[i][2], 1);
+        // All of the triangle's vertices are in R^3. We need them to be in R^4 to perform
+        // multiplications with a 4x4 matrix, so we add a 'w' coordinate to the 3D vectors
+        // with a value of 1.
+        var a = triangles[i][0].concat([1]);
+        var b = triangles[i][1].concat([1]);
+        var c = triangles[i][2].concat([1]);
 
-        // Now we project the point from 4D into 3D using our perspective matrix.
-        // To project the 3D coordinates into 2D, we simply ignore the z value and
-        // draw the (x, y) coordinates. (This is essentially an orthographic projection.)
+        // Now we apply the transformation to each of the triangle's 3 vertices.
+        a = matrixMultiplyVector(transform, a);
+        b = matrixMultiplyVector(transform, b);
+        c = matrixMultiplyVector(transform, c);
+
+        // Now we perform the perspective transformation.
         var projA = transformCoordinate(perspectiveMatrix, a);
         var projB = transformCoordinate(perspectiveMatrix, b);
         var projC = transformCoordinate(perspectiveMatrix, c);
 
-        // don't draw triangles that are outside the screen's boundaries
+        // We don't want to draw triangles that are outside the screen's boundaries
         if((projA[0] < -1 || projA[0] > 1 || projA[1] < -1 || projA[1] > 1) &&
            (projB[0] < -1 || projB[0] > 1 || projB[1] < -1 || projB[1] > 1) &&
            (projC[0] < -1 || projC[0] > 1 || projC[1] < -1 || projC[1] > 1))
             continue;
 
-        // Convert the normalized coordinates (-1.0 to 1.0) to pixel-space
+        // Convert the normalized coordinates (between -1.0 to 1.0) to pixel-space
         var screenA = convertToPixelCoordinates(projA);
         var screenB = convertToPixelCoordinates(projB);
         var screenC = convertToPixelCoordinates(projC);
@@ -352,7 +303,6 @@ function draw()
     context.fillStyle = "black";
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    //imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     clearDepthBuffer();
     imageData.data.set(blankImageData.data);
 
@@ -360,15 +310,15 @@ function draw()
     T = translate(T, 0, 0, -5);
     T = rotate(T, angle, 1, 0, 0);
     T = rotate(T, angle, 0, 1, 0);
-    drawTriangle3D(tetrahedronTriangles, tetrahedronColors, T, imageData);
+    drawAllTriangles3D(tetrahedronTriangles, tetrahedronColors, T, imageData);
     T = scale(T, -1, -1, -1);
-    drawTriangle3D(tetrahedronTriangles, tetrahedronColors, T, imageData);
+    drawAllTriangles3D(tetrahedronTriangles, tetrahedronColors, T, imageData);
 
     T = getIdentityMatrix();
     T = translate(T, 10, -10, -30);
     T = rotate(T, angle * 4, 0, 0, 1);
     T = rotate(T, angle * 4, 0, 1, 0);
-    drawTriangle3D(cubeTriangles, cubeColors, T, imageData);
+    drawAllTriangles3D(cubeTriangles, cubeColors, T, imageData);
 
     context.putImageData(imageData, 0, 0);
 }

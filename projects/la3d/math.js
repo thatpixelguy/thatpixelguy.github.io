@@ -61,7 +61,7 @@ function matrixMultiplyVector(matrix, vector)
 
     if(mw != vector.length)
     {
-        console.log("ERROR: Matrix-vector multiplication doesn't make sense!");
+        console.log("ERROR: Matrix-vector multiplication doesn't make sense!", matrix, vector);
         return null;
     }
 
@@ -137,27 +137,10 @@ function vectorScale(vector, scalar)
     return scaled;
 }
 
-function vectorFloor(vector)
+function transformCoordinate(matrix44, vector4)
 {
-    floored = [];
-    for(var i = 0;i < vector.length; i++)
-        floored[i] = Math.floor(vector[i]);
-    return floored;
-}
-
-function matrix44MultiplyVector3(matrix44, vector3, w)
-{
-    var vector4 = vector3.concat([w]);
-    return matrixMultiplyVector(matrix44, vector4);
-}
-
-function transformCoordinate(matrix44, vector3)
-{
-    var product = [0, 0, 0];
-    product[0] = vector3[0] * matrix44[0][0] + vector3[1] * matrix44[1][0] + vector3[2] * matrix44[2][0] + matrix44[3][0];
-    product[1] = vector3[0] * matrix44[0][1] + vector3[1] * matrix44[1][1] + vector3[2] * matrix44[2][1] + matrix44[3][1];
-    product[2] = vector3[0] * matrix44[0][2] + vector3[1] * matrix44[1][2] + vector3[2] * matrix44[2][2] + matrix44[3][2];
-    w = vector3[0] * matrix44[0][3] + vector3[1] * matrix44[1][3] + vector3[2] * matrix44[2][3] + matrix44[3][3];
+    product = matrixMultiplyVector(matrix44, vector4);
+    var w = product[3];
 
     if(w != 1)
     {
