@@ -62,7 +62,7 @@
     </div>
     <div id="right">
       <div style='padding: 0 30px 0 30px;'>
-        <h1>3D Rasterizer</h1>
+        <h1>3D Rasterizer: A Linear Algebra Project</h1>
         <p><b>Created by Michael Burns</b></p>
         <p>This is a simple rasterizer that demonstrates the application of linear algebra to 3D computer graphics. The program was written in Javascript and uses HTML5/Canvas for rendering.</p>
         <p>First off, here's a brief step-by-step summary of what the program does:</p>
@@ -97,6 +97,8 @@
         <p>E<sub>AB</sub>(P) = (P.x - A.x)*(B.y - A.y) - (P.y - A.y)*(B.x - A.x)</p>
 
         If E<sub>AB</sub> &ge; 0, then P lies on or to the right of the vector AB. We simply need to compute E<sub>AB</sub>, E<sub>BC</sub>, and E<sub>CA</sub> to find if P lies within the triangle. If it does, then we know we should draw a pixel at point P.
+
+        <p>All of this comes together into a nice little application that displays 3D objects on a 2D screen. Modern rasterizers are obviously much more sophisticated and far, <i>far</i> better optimized, though I think this still serves as useful as a demonstration of the fundamental ideas that drive modern 3D graphics.</p>
 
         <h3>References, Resources &amp; Research</h3>
 

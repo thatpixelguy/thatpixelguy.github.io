@@ -100,21 +100,21 @@ function edgeFunction(a, b, c)
 
 function drawTriangle(imageData, a, b, c, color)
 {
-    // To calculate barycentric coordinates, we need to be able to access the points of the triangle
-    // in a counter-clockwise order, so we store the CCW order of the vertices into v0, v1, and v2.
+    // The edge function requires us to access the points of the triangle
+    // in a clockwise order, so we store the CW order of the vertices into v0, v1, and v2.
 
     // Given the matrix:
     // | ax ay 1 |
     // | bx by 1 |
     // | cx cy 1 |
-    // If the determinant is less than zero, then the points are in CCW order (if the origin is at the topleft).
-    // Otherwise, the points are in CW order, and we must swap any two points. Found this trick here:
+    // If the determinant is greater than zero, then the points are in CCW order, and we must swap
+    // any two points. I found this trick here:
     // http://gamedev.stackexchange.com/questions/13229/sorting-array-of-points-in-clockwise-order
     var v0 = a;
     var v1 = b;
     var v2 = c;
     var det = a[0]*b[1] + b[0]*c[1] + c[0]*a[1] - b[1]*c[0] - c[1]*a[0] - a[1]*b[0];
-    if(det >= 0)
+    if(det > 0)
     {
         v1 = c;
         v2 = b;
@@ -133,15 +133,10 @@ function drawTriangle(imageData, a, b, c, color)
     {
         for(var x = Math.floor(left); x <= Math.floor(right); x++)
         {
-            // Calculate the barycentric coordinates of the point with respect to the triangle
             var p = [x + 0.5, y + 0.5, 0];
             var w0 = edgeFunction(v1, v2, p) / areaABC;
             var w1 = edgeFunction(v2, v0, p) / areaABC;
             var w2 = edgeFunction(v0, v1, p) / areaABC;
-
-            // Note that any point v within the triangle v0, v1, and v2 can be described as
-            // v = w0*v0 + w1*v1 + w2*v2
-            // What is of particular use here is that if a 
 
             // if the point lines on the triangle, we'll (probably) draw it...
             if(w0 >= 0 && w1 >= 0 && w2 >= 0)
