@@ -114,6 +114,11 @@ section {
   position: relative;
 }
 
+span.clear { 
+  clear: left;
+  display: block; 
+}
+
 .footer {
   text-align: center;
   margin-bottom: 24px;
