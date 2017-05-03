@@ -94,9 +94,7 @@ section {
   float: left;
   width: 400px;
   z-index: 0;
-  position: relative;
   height: 100%;
-  float: left;
   margin-left: -85px;
 }
 
@@ -111,7 +109,6 @@ section {
   padding: 30px 40px;
   text-align: center;
   float: left;
-  position: relative;
   z-index: 1;
 }
 
@@ -166,4 +163,3 @@ th {
 tr:nth-child(even) {
     background-color: #171717;
 }
-
